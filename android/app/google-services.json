@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "69742343877",
+    "firebase_url": "https://opcao-22381.firebaseio.com",
+    "project_id": "opcao-22381",
+    "storage_bucket": "opcao-22381.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69742343877:android:523de43881d36ecf4a22ac",
+        "android_client_info": {
+          "package_name": "com.andy.fit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69742343877-6jm7tqp87j8ppbajtq0i5jqf9rhpe06l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxA0LgI0vMky6dIp9abcmW63RL8dF4lGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69742343877-6jm7tqp87j8ppbajtq0i5jqf9rhpe06l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

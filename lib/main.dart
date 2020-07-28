@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/page/auth.dart';
+import 'package:flutterapp/page/landing.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             subtitle2: TextStyle(color: Colors.white),
         ),
       ),
-      home: AuthorizationPage(),
+      home: LandingPage(),
     );
   }
 }
