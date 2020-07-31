@@ -1,4 +1,6 @@
 import  'package:flutter/material.dart';
+import 'package:flutterapp/domain/user.dart';
+import 'package:flutterapp/services/auth.dart';
 
 class AuthorizationPage extends StatefulWidget {
   @override
@@ -12,15 +14,21 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
   bool _showLogin = true;
 
+  AuthService _authService = AuthService();
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         children: <Widget>[
           _logo(),
           SizedBox(height: 50,),
-          _form(_showLogin ? 'Login' : 'Register'),
+          _form(_showLogin ? 'Login' : 'Register',
+              _showLogin ? _onSignInPressed : _onRegisterPressed),
           Padding(
             padding: EdgeInsets.all(10),
             child: GestureDetector(
@@ -39,12 +47,6 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     );
   }
 
-  _auth() {
-    final _email = _emailController.text;
-    final _password = _passwordController.text;
-
-  }
-
   Widget _logo() => Padding(
       padding: EdgeInsets.only(top: 100),
       child: Align(
@@ -58,7 +60,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       ),
     );
 
-  Widget _form(String buttonText) => Column(
+  Widget _form(String buttonText, VoidCallback onPressed) => Column(
     children: <Widget>[
       SizedBox(height: 20),
       _input(Icons.email, 'E-mail', _emailController, false),
@@ -72,7 +74,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
           height: 48,
           child: RaisedButton(
             color: Colors.white,
-            onPressed: _auth,
+            onPressed: onPressed,
             child: Text(
               buttonText,
               style: TextStyle(
@@ -142,6 +144,40 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         alignment: Alignment.bottomCenter,
       ),
     );
+  }
+
+  _onRegisterPressed() async {
+    final _email = _emailController.text;
+    final _password = _passwordController.text;
+
+    if (_email.isNotEmpty && _password.isNotEmpty) {
+      User user = await _authService.registerInWithEmailAndPassword(_email.trim(), _password.trim());
+
+      print(user);
+
+      if (user == null) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Not Registered')));
+      }
+    } else {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Fill fields')));
+    }
+  }
+
+  _onSignInPressed() async {
+    final _email = _emailController.text;
+    final _password = _passwordController.text;
+
+    if (_email.isNotEmpty && _password.isNotEmpty) {
+      User user = await _authService.signInWithEmailAndPassword(_email.trim(), _password.trim());
+
+      print(user);
+
+      if (user == null) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Not Registered')));
+      }
+    } else {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Fill fields')));
+    }
   }
 }
 
